@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluasi Agen Bahasa: Teks Eksplanasi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styles & Typography */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0fdf4;
+            color: #1e293b;
+            overflow-x: hidden;
+            user-select: none; /* Prevent accidental text selection on touch screens */
+        }
+
+        /* Custom Scrollbar optimized for IFP (Thick & easy to touch) */
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0; 
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; 
+            border-radius: 8px;
+            border: 3px solid #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* View Management */
+        .view-section {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+        .view-section.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* IFP Button Feedback */
+        button:active {
+            transform: scale(0.96);
+            transition: transform 0.1s;
+        }
+
+        /* Custom Radio Styles for IFP */
+        input[type="radio"] {
+            width: 2rem;
+            height: 2rem;
+            accent-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 relative text-xl">
+
+    <!-- Global Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex gap-4">
+        <button id="btn-stimulus-global" onclick="showStimulus()" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-xl border-4 border-white transition flex items-center justify-center gap-2 font-bold text-lg">
+            <i data-lucide="book-open" class="w-8 h-8"></i> Teks Stimulus
+        </button>
+        <button onclick="toggleFullscreen()" class="bg-slate-800 hover:bg-slate-900 text-white p-4 rounded-full shadow-xl border-4 border-white transition flex items-center justify-center">
+            <i data-lucide="maximize" class="w-8 h-8"></i>
+        </button>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="app" class="w-full h-full">
+
+        <!-- VIEW: TEKS STIMULUS (Halaman Penuh) -->
+        <section id="view-stimulus" class="view-section bg-slate-100 p-8">
+            <div class="max-w-[95vw] w-full mx-auto mt-4 bg-white rounded-3xl shadow-2xl overflow-hidden fade-in border-t-8 border-blue-500 flex flex-col min-h-[85vh]">
+                <div class="p-8 bg-blue-600 border-b flex flex-col md:flex-row justify-between items-center text-white gap-6">
+                    <h2 class="text-4xl font-bold flex items-center gap-4"><i data-lucide="book-text" class="w-12 h-12"></i> Stimulus: Proses Terjadinya Hujan</h2>
+                    <button onclick="closeStimulus()" class="bg-blue-700 hover:bg-blue-800 border-4 border-blue-400 text-white px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition shadow-lg w-full md:w-auto justify-center">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-12 overflow-y-auto text-3xl leading-relaxed text-slate-700 flex flex-col lg:flex-row gap-12 flex-1">
+                    <div class="lg:w-1/3">
+                        <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Hujan" class="w-full h-full object-cover rounded-3xl shadow-lg min-h-[400px]">
+                    </div>
+                    <div class="lg:w-2/3 flex flex-col justify-center">
+                        <p class="mb-8 indent-16">
+                            Hujan merupakan peristiwa alam yang sering terjadi di sekitar kita. Hujan sangat penting bagi kehidupan manusia, hewan, dan tumbuhan. Proses terjadinya hujan diawali dengan penguapan air dari laut, sungai, dan danau karena panas matahari. Uap air tersebut naik ke udara dan mengalami pendinginan. 
+                        </p>
+                        <p class="mb-8 indent-16">
+                            Setelah itu, uap air berubah menjadi titik-titik air kecil yang disebut kondensasi. Titik-titik air ini berkumpul membentuk awan. Ketika awan sudah terlalu berat, titik-titik air akan jatuh ke bumi sebagai hujan. Proses ini disebut presipitasi. Air hujan kemudian meresap ke dalam tanah atau mengalir ke sungai dan kembali ke laut.
+                        </p>
+                        <p class="mb-8 indent-16">
+                            Kesimpulannya, proses terjadinya hujan berlangsung melalui beberapa tahapan yang saling berurutan, yaitu penguapan, kondensasi, dan presipitasi. Oleh karena itu, setiap tahap sangat penting dan saling berkaitan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: RANGKUMAN MATERI -->
+        <section id="view-rangkuman" class="view-section bg-slate-100 p-8">
+            <div class="max-w-[95vw] w-full mx-auto mt-4 bg-white rounded-3xl shadow-2xl overflow-hidden fade-in border-t-8 border-purple-500 flex flex-col min-h-[85vh]">
+                <div class="p-8 bg-purple-600 border-b flex flex-col md:flex-row justify-between items-center text-white gap-6">
+                    <h2 class="text-4xl font-bold flex items-center gap-4"><i data-lucide="book-open" class="w-12 h-12"></i> Rangkuman Materi: Teks Eksplanasi</h2>
+                    <button onclick="backToMenu()" class="bg-purple-700 hover:bg-purple-800 border-4 border-purple-400 text-white px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition shadow-lg w-full md:w-auto justify-center">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali ke Menu
+                    </button>
+                </div>
+                <div class="p-12 overflow-y-auto text-2xl leading-relaxed text-slate-700 flex flex-col gap-8 flex-1">
+                    <div class="bg-purple-50 p-8 rounded-3xl border-4 border-purple-100">
+                        <h3 class="text-3xl font-bold text-purple-800 mb-4">1. Pengertian Teks Eksplanasi</h3>
+                        <p>Teks Eksplanasi adalah teks yang menjelaskan tentang proses 'mengapa' dan 'bagaimana' kejadian-kejadian alam, sosial, ilmu pengetahuan, budaya, dan lainnya dapat terjadi.</p>
+                    </div>
+                    <div class="bg-indigo-50 p-8 rounded-3xl border-4 border-indigo-100">
+                        <h3 class="text-3xl font-bold text-indigo-800 mb-4">2. Struktur Teks Eksplanasi</h3>
+                        <ul class="list-disc list-inside space-y-4 ml-4">
+                            <li><strong>Pernyataan Umum:</strong> Berisi penjelasan awal atau gambaran umum tentang suatu fenomena/peristiwa.</li>
+                            <li><strong>Deretan Penjelas (Urutan Sebab-Akibat):</strong> Berisi penjelasan detail mengenai tahapan proses terjadinya fenomena tersebut dari awal hingga akhir.</li>
+                            <li><strong>Kesimpulan (Interpretasi):</strong> Berisi intisari, ringkasan, atau pandangan penulis terhadap fenomena yang telah dijelaskan.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-pink-50 p-8 rounded-3xl border-4 border-pink-100">
+                        <h3 class="text-3xl font-bold text-pink-800 mb-4">3. Ciri-ciri Teks Eksplanasi</h3>
+                        <ul class="list-disc list-inside space-y-4 ml-4">
+                            <li>Informasi yang dimuat berdasarkan fakta (faktual).</li>
+                            <li>Sifatnya informatif dan tidak bertujuan untuk memengaruhi pembaca.</li>
+                            <li>Banyak menggunakan kata penunjuk urutan waktu atau sebab-akibat (contoh: <i>pertama, kemudian, oleh karena itu, sehingga</i>).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 1: INTRO (Dibuat Menyamping Kiri-Kanan) -->
+        <section id="view-intro" class="view-section active justify-center bg-gradient-to-br from-blue-100 via-white to-emerald-100 p-8">
+            <div class="max-w-[90vw] w-full mx-auto fade-in">
+                <div class="bg-white rounded-[3rem] shadow-2xl p-10 lg:p-16 border-[8px] border-white relative overflow-hidden flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Decorative background -->
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+                    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+                    
+                    <!-- Kiri: Karakter & Sambutan -->
+                    <div class="relative z-10 flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+                        <img src="https://i.imgur.com/YbvvB0o.jpeg" alt="Pak Rahmat" class="w-48 h-48 rounded-full border-[6px] border-blue-500 shadow-xl object-cover mb-8">
+                        <div class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-full font-bold text-xl mb-4 tracking-wider uppercase">Misi Literasi SD Kelas 5</div>
+                        <h1 class="text-5xl lg:text-7xl font-extrabold text-slate-800 mb-6 leading-tight">Evaluasi Agen Bahasa:<br><span class="text-blue-600">Teks Eksplanasi</span></h1>
+                        <p class="text-2xl text-slate-600 max-w-2xl leading-relaxed">
+                            Halo! Bapak adalah <span class="font-bold text-slate-800">Pak Rahmat</span>. Hari ini kita akan menguji kemampuanmu dalam memahami proses alam melalui teks eksplanasi. Siap menjadi Agen Bahasa yang hebat?
+                        </p>
+                    </div>
+
+                    <!-- Kanan: Form Pendaftaran -->
+                    <div class="relative z-10 flex-1 w-full bg-slate-50 p-10 rounded-[2.5rem] border-4 border-slate-100 shadow-inner flex flex-col justify-center">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-3"><i data-lucide="user-check" class="w-10 h-10 text-blue-500"></i> Pendaftaran Agen</h2>
+                        <div class="mb-8">
+                            <label class="block text-slate-700 font-bold mb-4 text-2xl">Nama Lengkap Agen:</label>
+                            <input type="text" id="input-nama" class="w-full p-6 text-3xl border-4 border-slate-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition outline-none" placeholder="Masukkan nama..." oninput="checkIntroForm()">
+                        </div>
+                        <div class="mb-12">
+                            <label class="block text-slate-700 font-bold mb-4 text-2xl">Asal Sekolah:</label>
+                            <input type="text" id="input-sekolah" class="w-full p-6 text-3xl border-4 border-slate-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition outline-none" placeholder="Masukkan nama sekolah..." oninput="checkIntroForm()">
+                        </div>
+
+                        <button id="btn-start" disabled onclick="startMission()" class="bg-slate-300 text-slate-500 font-bold py-6 px-12 rounded-2xl text-3xl shadow-xl transition-all duration-300 transform w-full flex items-center justify-center gap-4 cursor-not-allowed">
+                            Mulai Evaluasi <i data-lucide="rocket" class="w-10 h-10"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: MENU UTAMA (Grid Kolom Menyamping) -->
+        <section id="view-menu" class="view-section bg-slate-100 p-8">
+            <div class="max-w-[95vw] w-full mx-auto mt-4 fade-in flex-1 flex flex-col">
+                <header class="flex flex-row justify-between items-center bg-white p-8 rounded-3xl shadow-lg mb-8 border-b-8 border-blue-500">
+                    <div>
+                        <h2 class="text-4xl font-bold text-slate-800 flex items-center gap-4 mb-2"><i data-lucide="layout-dashboard" class="w-12 h-12 text-blue-500"></i> Markas Agen Bahasa</h2>
+                        <p class="text-2xl text-slate-600">Selesaikan ke-6 misi di bawah ini secara berurutan atau acak.</p>
+                    </div>
+                    <div class="text-right bg-blue-50 py-4 px-8 rounded-2xl border-2 border-blue-100 min-w-[300px]">
+                        <p class="text-xl text-blue-800 font-semibold mb-1">Agen: <span id="display-nama" class="font-bold text-3xl block truncate"></span></p>
+                        <p class="text-xl text-blue-600 truncate"><i data-lucide="school" class="w-5 h-5 inline"></i> <span id="display-sekolah"></span></p>
+                    </div>
+                </header>
+
+                <!-- Panel Pusat Belajar / Rangkuman -->
+                <div class="mb-8 bg-purple-50 p-6 rounded-3xl border-4 border-purple-200 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                    <div class="flex items-center gap-6">
+                        <div class="bg-purple-200 p-4 rounded-2xl text-purple-700">
+                            <i data-lucide="library" class="w-12 h-12"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold text-purple-900 mb-1">Pusat Belajar</h3>
+                            <p class="text-xl text-purple-700">Pelajari materi Teks Eksplanasi sebelum memulai misi evaluasi.</p>
+                        </div>
+                    </div>
+                    <button onclick="goToRangkuman()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-5 px-10 rounded-2xl text-2xl shadow-lg transition-transform whitespace-nowrap flex items-center gap-3">
+                        <i data-lucide="book-open" class="w-8 h-8"></i> Buka Rangkuman Materi
+                    </button>
+                </div>
+
+                <!-- Grid Misi 3 Kolom Menyamping -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1">
+                    
+                    <!-- Kolom 1: Mudah -->
+                    <div class="flex flex-col gap-6 bg-emerald-50/50 p-6 rounded-3xl border-2 border-emerald-100">
+                        <h3 class="text-3xl font-bold text-emerald-600 flex items-center justify-center gap-3 bg-emerald-100 py-4 rounded-2xl">
+                            <i data-lucide="star" class="w-8 h-8 fill-emerald-500 text-emerald-500"></i> Level Mudah
+                        </h3>
+                        <button onclick="goToEval(1)" id="card-eval-1" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-emerald-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-1" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-emerald-100 w-20 h-20 rounded-2xl flex items-center justify-center text-emerald-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="list-checks" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 1:<br>Pilihan Ganda</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">5 Soal (C4) menguji informasi utama teks.</p>
+                        </button>
+                        <button onclick="goToEval(2)" id="card-eval-2" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-emerald-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-2" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-emerald-100 w-20 h-20 rounded-2xl flex items-center justify-center text-emerald-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="git-merge" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 2:<br>Menjodohkan</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">Mencocokkan istilah (C4) dengan maknanya.</p>
+                        </button>
+                    </div>
+
+                    <!-- Kolom 2: Sedang -->
+                    <div class="flex flex-col gap-6 bg-amber-50/50 p-6 rounded-3xl border-2 border-amber-100">
+                        <h3 class="text-3xl font-bold text-amber-600 flex items-center justify-center gap-3 bg-amber-100 py-4 rounded-2xl">
+                            <div class="flex"><i data-lucide="star" class="w-8 h-8 fill-amber-500 text-amber-500"></i><i data-lucide="star" class="w-8 h-8 fill-amber-500 text-amber-500"></i></div> Level Sedang
+                        </h3>
+                        <button onclick="goToEval(3)" id="card-eval-3" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-amber-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-3" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-amber-100 w-20 h-20 rounded-2xl flex items-center justify-center text-amber-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="edit-3" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 3:<br>Isian Terbuka</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">Menganalisis kaitan tahapan hujan (C4-C5).</p>
+                        </button>
+                        <button onclick="goToEval(4)" id="card-eval-4" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-amber-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-4" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-amber-100 w-20 h-20 rounded-2xl flex items-center justify-center text-amber-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="scale" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 4:<br>Evaluasi Pernyataan</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">Menilai sebuah pernyataan (C5) beserta alasan.</p>
+                        </button>
+                    </div>
+
+                    <!-- Kolom 3: Sulit -->
+                    <div class="flex flex-col gap-6 bg-rose-50/50 p-6 rounded-3xl border-2 border-rose-100">
+                        <h3 class="text-3xl font-bold text-rose-600 flex items-center justify-center gap-3 bg-rose-100 py-4 rounded-2xl">
+                            <div class="flex"><i data-lucide="star" class="w-8 h-8 fill-rose-500 text-rose-500"></i><i data-lucide="star" class="w-8 h-8 fill-rose-500 text-rose-500"></i><i data-lucide="star" class="w-8 h-8 fill-rose-500 text-rose-500"></i></div> Level Sulit
+                        </h3>
+                        <button onclick="goToEval(5)" id="card-eval-5" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-rose-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-5" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-rose-100 w-20 h-20 rounded-2xl flex items-center justify-center text-rose-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="brain-circuit" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 5:<br>Uraian HOTS</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">Menjelaskan hubungan kompleks (C5-C6).</p>
+                        </button>
+                        <button onclick="goToEval(6)" id="card-eval-6" class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border-4 border-transparent hover:border-rose-400 transition-all text-left relative overflow-hidden group flex flex-col justify-center">
+                            <div id="badge-eval-6" class="hidden absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm flex items-center gap-1"><i data-lucide="check-circle" class="w-5 h-5"></i> Selesai</div>
+                            <div class="flex items-center gap-6 mb-4">
+                                <div class="bg-rose-100 w-20 h-20 rounded-2xl flex items-center justify-center text-rose-600 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="pen-tool" class="w-10 h-10"></i>
+                                </div>
+                                <h4 class="text-3xl font-bold text-slate-800">Misi 6:<br>Kreasi Teks</h4>
+                            </div>
+                            <p class="text-slate-500 text-xl">Membuat teks eksplanasi mandiri (C6).</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tombol Lihat Hasil -->
+                <div id="container-lihat-hasil" class="hidden text-center fade-in bg-white p-6 mt-8 rounded-3xl shadow-xl border-t-8 border-indigo-500 flex flex-col lg:flex-row justify-between items-center gap-6">
+                    <h3 class="text-3xl font-bold text-slate-800 ml-4">Luar Biasa! Semua Misi Selesai.</h3>
+                    <button onclick="generateResult()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-5 px-12 rounded-2xl text-3xl shadow-xl transition-transform inline-flex items-center justify-center gap-4">
+                        Lihat Laporan Evaluasi <i data-lucide="clipboard-check" class="w-10 h-10"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VIEW TEMPLATE EVALUASI -->
+        
+        <!-- EVAL 1: Pilihan Ganda (Grid 2 Kolom) -->
+        <section id="view-eval-1" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-emerald-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-emerald-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Mudah</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 1: Pilihan Ganda</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10 bg-white" id="form-eval-1">
+                    <!-- Grid Soal Menyamping -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <!-- Soal 1 -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                            <p class="font-bold text-2xl mb-6 text-slate-800">1. Pernyataan mana yang sesuai dengan teks tentang awal mula terjadinya hujan?</p>
+                            <div class="grid gap-4">
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q1" value="a" class="mr-4"> <span class="text-xl">a. Hujan dimulai dari kondensasi awan hitam.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q1" value="b" class="mr-4"> <span class="text-xl">b. Presipitasi adalah proses pertama terjadinya hujan.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q1" value="c" class="mr-4"> <span class="text-xl">c. Hujan diawali dengan penguapan air karena panas matahari.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q1" value="d" class="mr-4"> <span class="text-xl">d. Air hujan langsung meresap ke dalam tanah tanpa proses.</span></label>
+                            </div>
+                        </div>
+                        <!-- Soal 2 -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                            <p class="font-bold text-2xl mb-6 text-slate-800">2. Apa yang menyebabkan titik-titik air di awan akhirnya jatuh ke bumi sebagai hujan?</p>
+                            <div class="grid gap-4">
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q2" value="a" class="mr-4"> <span class="text-xl">a. Karena awan tertiup angin kencang.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q2" value="b" class="mr-4"> <span class="text-xl">b. Karena awan sudah terlalu berat.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q2" value="c" class="mr-4"> <span class="text-xl">c. Karena panas matahari menyinari awan.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q2" value="d" class="mr-4"> <span class="text-xl">d. Karena proses kondensasi berhenti.</span></label>
+                            </div>
+                        </div>
+                        <!-- Soal 3 -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                            <p class="font-bold text-2xl mb-6 text-slate-800">3. Bagaimana urutan proses terjadinya hujan yang benar berdasarkan teks?</p>
+                            <div class="grid gap-4">
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q3" value="a" class="mr-4"> <span class="text-xl">a. Kondensasi ➔ Penguapan ➔ Presipitasi</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q3" value="b" class="mr-4"> <span class="text-xl">b. Presipitasi ➔ Kondensasi ➔ Penguapan</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q3" value="c" class="mr-4"> <span class="text-xl">c. Penguapan ➔ Kondensasi ➔ Presipitasi</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q3" value="d" class="mr-4"> <span class="text-xl">d. Penguapan ➔ Presipitasi ➔ Kondensasi</span></label>
+                            </div>
+                        </div>
+                        <!-- Soal 4 -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                            <p class="font-bold text-2xl mb-6 text-slate-800">4. Berdasarkan kesimpulan teks, informasi utama apa yang ditekankan?</p>
+                            <div class="grid gap-4">
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q4" value="a" class="mr-4"> <span class="text-xl">a. Hujan hanya terjadi di laut dan danau.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q4" value="b" class="mr-4"> <span class="text-xl">b. Panas matahari satu-satunya penyebab hujan.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q4" value="c" class="mr-4"> <span class="text-xl">c. Tahapan hujan sangat penting & saling berkaitan.</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q4" value="d" class="mr-4"> <span class="text-xl">d. Presipitasi merupakan tahap yang tidak penting.</span></label>
+                            </div>
+                        </div>
+                        <!-- Soal 5 (Center in grid) -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200 lg:col-span-2">
+                            <p class="font-bold text-2xl mb-6 text-slate-800">5. Berdasarkan teks, istilah untuk proses perubahan uap air menjadi titik-titik air kecil disebut...</p>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q5" value="a" class="mr-4"> <span class="text-xl">a. Presipitasi</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q5" value="b" class="mr-4"> <span class="text-xl">b. Evaporasi</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q5" value="c" class="mr-4"> <span class="text-xl">c. Infiltrasi</span></label>
+                                <label class="flex items-center p-5 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="e1q5" value="d" class="mr-4"> <span class="text-xl">d. Kondensasi</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval1()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 1</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVAL 2: Menjodohkan (Grid 3 Kolom) -->
+        <section id="view-eval-2" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-emerald-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-emerald-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Mudah</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 2: Menjodohkan</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10">
+                    <p class="text-3xl text-slate-600 mb-10 border-l-8 border-emerald-500 pl-6 bg-emerald-50 p-6 rounded-r-xl">Pilihlah penjelasan yang tepat untuk setiap istilah proses terjadinya hujan di bawah ini!</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                        <!-- Item 1 -->
+                        <div class="flex flex-col gap-6 bg-slate-50 p-8 rounded-3xl border-4 border-slate-200 text-center">
+                            <div class="font-bold text-4xl text-slate-800 flex flex-col items-center gap-4">
+                                <span class="bg-blue-600 text-white w-20 h-20 flex items-center justify-center rounded-full text-5xl shadow-md">1</span> 
+                                Penguapan
+                            </div>
+                            <select id="e2q1" class="w-full p-6 text-2xl border-4 border-blue-300 rounded-2xl focus:border-blue-500 bg-white outline-none cursor-pointer mt-auto">
+                                <option value="" disabled selected>-- Ketuk untuk memilih --</option>
+                                <option value="a">A. Titik-titik air di awan jatuh ke bumi sebagai hujan.</option>
+                                <option value="b">B. Uap air naik dan mengalami pendinginan menjadi titik air.</option>
+                                <option value="c">C. Air berubah menjadi uap karena panas matahari.</option>
+                            </select>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex flex-col gap-6 bg-slate-50 p-8 rounded-3xl border-4 border-slate-200 text-center">
+                            <div class="font-bold text-4xl text-slate-800 flex flex-col items-center gap-4">
+                                <span class="bg-blue-600 text-white w-20 h-20 flex items-center justify-center rounded-full text-5xl shadow-md">2</span> 
+                                Kondensasi
+                            </div>
+                            <select id="e2q2" class="w-full p-6 text-2xl border-4 border-blue-300 rounded-2xl focus:border-blue-500 bg-white outline-none cursor-pointer mt-auto">
+                                <option value="" disabled selected>-- Ketuk untuk memilih --</option>
+                                <option value="a">A. Titik-titik air di awan jatuh ke bumi sebagai hujan.</option>
+                                <option value="b">B. Uap air naik dan mengalami pendinginan menjadi titik air.</option>
+                                <option value="c">C. Air berubah menjadi uap karena panas matahari.</option>
+                            </select>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex flex-col gap-6 bg-slate-50 p-8 rounded-3xl border-4 border-slate-200 text-center">
+                            <div class="font-bold text-4xl text-slate-800 flex flex-col items-center gap-4">
+                                <span class="bg-blue-600 text-white w-20 h-20 flex items-center justify-center rounded-full text-5xl shadow-md">3</span> 
+                                Presipitasi
+                            </div>
+                            <select id="e2q3" class="w-full p-6 text-2xl border-4 border-blue-300 rounded-2xl focus:border-blue-500 bg-white outline-none cursor-pointer mt-auto">
+                                <option value="" disabled selected>-- Ketuk untuk memilih --</option>
+                                <option value="a">A. Titik-titik air di awan jatuh ke bumi sebagai hujan.</option>
+                                <option value="b">B. Uap air naik dan mengalami pendinginan menjadi titik air.</option>
+                                <option value="c">C. Air berubah menjadi uap karena panas matahari.</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval2()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 2</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVAL 3: Isian Terbuka (Grid 2 Kolom) -->
+        <section id="view-eval-3" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-amber-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-amber-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Sedang</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 3: Isian Terbuka</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10 flex-1 flex flex-col">
+                    <p class="text-2xl text-slate-600 mb-8 border-l-8 border-amber-500 pl-6 bg-amber-50 p-6 rounded-r-xl">Jawablah pertanyaan di bawah ini berdasarkan teks stimulus dengan kalimatmu sendiri!</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10 flex-1">
+                        <div class="bg-slate-50 p-8 border-2 border-slate-200 rounded-3xl flex flex-col">
+                            <label class="block font-bold text-3xl mb-6 text-slate-800">1. Menurutmu, mengapa setiap tahapan dalam proses hujan saling berkaitan?</label>
+                            <textarea id="e3q1" class="w-full flex-1 min-h-[250px] p-6 text-2xl border-4 border-slate-300 rounded-2xl focus:border-amber-500 focus:ring-4 focus:ring-amber-200 outline-none transition resize-none bg-white" placeholder="Ketik jawabanmu di sini..."></textarea>
+                        </div>
+
+                        <div class="bg-slate-50 p-8 border-2 border-slate-200 rounded-3xl flex flex-col">
+                            <label class="block font-bold text-3xl mb-6 text-slate-800">2. Tuliskan kembali kesimpulan dari teks tersebut dengan bahasa yang lebih singkat!</label>
+                            <textarea id="e3q2" class="w-full flex-1 min-h-[250px] p-6 text-2xl border-4 border-slate-300 rounded-2xl focus:border-amber-500 focus:ring-4 focus:ring-amber-200 outline-none transition resize-none bg-white" placeholder="Ketik jawabanmu di sini..."></textarea>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval3()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 3</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVAL 4: Evaluasi Pernyataan (Grid Kiri-Kanan) -->
+        <section id="view-eval-4" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-amber-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-amber-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Sedang</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 4: Evaluasi Pernyataan</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10 flex-1 flex flex-col">
+                    <p class="text-2xl text-slate-600 mb-8 border-l-8 border-amber-500 pl-6 bg-amber-50 p-6 rounded-r-xl">Bacalah pernyataan di bawah ini, lalu berikan penilaian dan alasanmu!</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10 flex-1">
+                        <!-- Kiri: Pernyataan & Pilihan -->
+                        <div class="flex flex-col gap-8 bg-slate-50 p-8 rounded-3xl border-2 border-slate-200">
+                            <div class="bg-slate-800 text-white p-10 rounded-3xl text-center shadow-inner h-full flex items-center justify-center">
+                                <p class="text-4xl font-bold italic leading-relaxed">"Proses kondensasi tidak terlalu penting dalam terjadinya hujan."</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-3xl mb-6 text-slate-800 text-center">Apakah pernyataan di atas Benar atau Salah?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex-1 flex items-center justify-center p-8 bg-white border-4 border-slate-300 rounded-2xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition">
+                                        <input type="radio" name="e4_choice" value="Benar" class="mr-6"> <span class="text-4xl font-bold text-slate-700">Benar</span>
+                                    </label>
+                                    <label class="flex-1 flex items-center justify-center p-8 bg-white border-4 border-slate-300 rounded-2xl cursor-pointer hover:border-red-500 hover:bg-red-50 transition">
+                                        <input type="radio" name="e4_choice" value="Salah" class="mr-6"> <span class="text-4xl font-bold text-slate-700">Salah</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kanan: Alasan -->
+                        <div class="flex flex-col bg-slate-50 p-8 rounded-3xl border-2 border-slate-200">
+                            <label class="block font-bold text-3xl mb-6 text-slate-800">Jelaskan alasan dari pilihanmu!</label>
+                            <textarea id="e4_reason" class="w-full flex-1 p-8 text-2xl border-4 border-slate-300 rounded-2xl focus:border-amber-500 focus:ring-4 focus:ring-amber-200 outline-none transition resize-none bg-white min-h-[300px]" placeholder="Ketik alasan lengkapmu di sini..."></textarea>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval4()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 4</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVAL 5: Uraian HOTS (Grid Kiri-Kanan) -->
+        <section id="view-eval-5" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-rose-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-rose-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Sulit</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 5: Uraian HOTS</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10 flex-1 flex flex-col">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10 flex-1">
+                        <!-- Kiri: Pertanyaan (1 Kolom) -->
+                        <div class="lg:col-span-1 bg-rose-50 border-4 border-rose-200 p-8 rounded-3xl flex flex-col gap-6">
+                            <i data-lucide="brain" class="w-16 h-16 text-rose-600"></i>
+                            <h3 class="font-bold text-4xl text-rose-800">Pertanyaan Analisis Mendalam</h3>
+                            <p class="text-2xl text-rose-900 leading-relaxed">Jelaskan secara rinci hubungan antara proses <strong>penguapan</strong>, <strong>kondensasi</strong>, dan <strong>presipitasi</strong> dalam membentuk hujan! <br><br>Apa yang terjadi jika salah satu proses tersebut terhenti?</p>
+                        </div>
+
+                        <!-- Kanan: Textarea (2 Kolom) -->
+                        <div class="lg:col-span-2 flex flex-col">
+                            <textarea id="e5_answer" class="w-full flex-1 p-8 text-2xl border-4 border-slate-300 rounded-3xl focus:border-rose-500 focus:ring-4 focus:ring-rose-200 outline-none transition resize-none leading-relaxed min-h-[350px]" placeholder="Ketik jawaban lengkapmu di sini..."></textarea>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval5()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 5</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVAL 6: Kreasi (Grid Kiri-Kanan) -->
+        <section id="view-eval-6" class="view-section bg-slate-50 p-8">
+            <div class="max-w-[95vw] w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden fade-in border-t-8 border-rose-500 flex flex-col">
+                <div class="p-8 bg-slate-100 border-b flex justify-between items-center">
+                    <div>
+                        <span class="bg-rose-500 text-white px-4 py-2 rounded-lg font-bold text-lg mb-2 inline-block">Level Sulit</span>
+                        <h2 class="text-4xl font-bold text-slate-800">Misi 6: Kreasi Teks</h2>
+                    </div>
+                    <button onclick="backToMenu()" class="bg-white border-4 border-slate-300 text-slate-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-2xl flex items-center gap-3 transition">
+                        <i data-lucide="arrow-left" class="w-8 h-8"></i> Kembali
+                    </button>
+                </div>
+                <div class="p-10 flex-1 flex flex-col">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10 flex-1">
+                        <!-- Kiri: Instruksi (1 Kolom) -->
+                        <div class="lg:col-span-1 bg-slate-100 p-8 rounded-3xl border-4 border-slate-200 flex flex-col">
+                            <h3 class="font-bold text-3xl mb-6 text-slate-800 border-b-4 border-rose-300 pb-4">Instruksi Kreasi:</h3>
+                            <ul class="list-disc list-inside text-2xl text-slate-700 space-y-4 leading-relaxed">
+                                <li>Buatlah <strong>teks eksplanasi sederhana</strong>.</li>
+                                <li>Pilih salah satu tema:
+                                    <ul class="ml-8 list-circle text-rose-700 font-semibold mt-2 mb-2">
+                                        <li>Terjadinya Pelangi</li>
+                                        <li>Terjadinya Angin</li>
+                                        <li>Terjadinya Banjir</li>
+                                    </ul>
+                                </li>
+                                <li>Wajib memuat 3 struktur: <strong>Pernyataan Umum</strong>, <strong>Urutan Penjelasan</strong>, dan <strong>Kesimpulan</strong>.</li>
+                                <li>Minimal terdiri dari <strong>2 paragraf</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Kanan: Area Menulis (2 Kolom) -->
+                        <div class="lg:col-span-2 flex flex-col gap-0 border-4 border-slate-300 rounded-3xl overflow-hidden focus-within:border-rose-500 focus-within:ring-4 focus-within:ring-rose-200 transition-all">
+                            <input type="text" id="e6_title" class="w-full p-6 text-3xl font-bold border-b-4 border-slate-300 outline-none text-center bg-white" placeholder="Ketik Judul Teks Eksplanasimu">
+                            <textarea id="e6_content" class="w-full flex-1 p-8 text-2xl outline-none resize-none leading-relaxed bg-slate-50" placeholder="Mulai menulis cerita penjelasannya di sini..."></textarea>
+                        </div>
+                    </div>
+
+                    <button onclick="saveEval6()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-8 rounded-2xl text-3xl shadow-lg transition">Simpan & Selesai Misi 6</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW RESULT (Grid Layout Dimaksimalkan) -->
+        <section id="view-result" class="view-section bg-slate-100 p-8">
+            <div class="max-w-[95vw] w-full mx-auto mt-4 fade-in">
+                
+                <!-- Header Laporan -->
+                <div class="bg-blue-600 text-white rounded-3xl p-10 shadow-2xl mb-8 text-center relative overflow-hidden flex flex-row items-center justify-center gap-10">
+                    <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    <i data-lucide="award" class="w-32 h-32 text-yellow-300 relative z-10"></i>
+                    <div class="text-left relative z-10">
+                        <h1 class="text-6xl font-extrabold mb-2">Laporan Evaluasi Agen Bahasa</h1>
+                        <p class="text-3xl text-blue-100">Misi Teks Eksplanasi Kelas 5 SD Selesai!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+                    
+                    <!-- Kiri: Info & Skor Otomatis (1 Kolom dari 4) -->
+                    <div class="xl:col-span-1 space-y-8">
+                        <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-blue-500">
+                            <h3 class="text-xl font-bold text-slate-500 mb-2 uppercase tracking-wider">Identitas Agen</h3>
+                            <p class="text-4xl font-bold text-slate-800 mb-2 truncate" id="res-nama">Nama Siswa</p>
+                            <p class="text-2xl text-slate-600 flex items-center gap-3 truncate"><i data-lucide="school" class="w-6 h-6"></i> <span id="res-sekolah">Asal Sekolah</span></p>
+                        </div>
+
+                        <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-emerald-500">
+                            <h3 class="text-xl font-bold text-slate-500 mb-6 uppercase tracking-wider">Skor Objektif (Sistem)</h3>
+                            
+                            <div class="bg-emerald-50 rounded-2xl p-6 mb-4 border-2 border-emerald-100">
+                                <p class="text-xl font-bold text-emerald-800 mb-2">Misi 1: Pilihan Ganda</p>
+                                <div class="flex items-end gap-2">
+                                    <span class="text-6xl font-extrabold text-emerald-600" id="res-score-1">0</span>
+                                    <span class="text-2xl text-emerald-600 mb-1">/ 100</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-emerald-50 rounded-2xl p-6 border-2 border-emerald-100">
+                                <p class="text-xl font-bold text-emerald-800 mb-2">Misi 2: Menjodohkan</p>
+                                <div class="flex items-end gap-2">
+                                    <span class="text-6xl font-extrabold text-emerald-600" id="res-score-2">0</span>
+                                    <span class="text-2xl text-emerald-600 mb-1">/ 100</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="resetApp()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-6 px-6 rounded-2xl text-2xl transition flex items-center justify-center gap-3 shadow-xl">
+                            <i data-lucide="rotate-ccw" class="w-8 h-8"></i> Mulai Ulang (Reset)
+                        </button>
+                    </div>
+
+                    <!-- Kanan: Area Penilaian Guru (Grid 2x2 menyamping di dalam 3 Kolom) -->
+                    <div class="xl:col-span-3">
+                        <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-amber-500 h-full flex flex-col">
+                            <div class="flex items-center justify-between mb-8 pb-6 border-b-4 border-slate-100">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-amber-100 p-4 rounded-2xl text-amber-600">
+                                        <i data-lucide="clipboard-edit" class="w-12 h-12"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-4xl font-bold text-slate-800">Area Penilaian Guru</h2>
+                                        <p class="text-slate-500 text-2xl mt-1">Rubrik penilaian manual jawaban uraian siswa.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grid 2x2 untuk jawaban esai/isian -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1">
+                                <!-- Hasil Eval 3 -->
+                                <div class="bg-slate-50 rounded-2xl p-6 border-4 border-slate-200 flex flex-col">
+                                    <div class="flex justify-between items-center mb-6 border-b-2 border-slate-200 pb-4">
+                                        <h3 class="font-bold text-2xl text-slate-800">Misi 3: Isian Terbuka</h3>
+                                        <span class="bg-white px-4 py-2 rounded-xl border-2 border-slate-300 text-lg font-bold text-slate-500">Nilai: ___/100</span>
+                                    </div>
+                                    <div class="space-y-4 overflow-y-auto max-h-[300px] pr-2 flex-1">
+                                        <div>
+                                            <p class="text-lg font-bold text-slate-500 mb-2">Q1: Mengapa tahapan saling berkaitan?</p>
+                                            <div class="bg-white p-4 rounded-xl border-2 border-slate-200 text-xl" id="res-e3q1">-</div>
+                                        </div>
+                                        <div>
+                                            <p class="text-lg font-bold text-slate-500 mb-2">Q2: Kesimpulan teks</p>
+                                            <div class="bg-white p-4 rounded-xl border-2 border-slate-200 text-xl" id="res-e3q2">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hasil Eval 4 -->
+                                <div class="bg-slate-50 rounded-2xl p-6 border-4 border-slate-200 flex flex-col">
+                                    <div class="flex justify-between items-center mb-6 border-b-2 border-slate-200 pb-4">
+                                        <h3 class="font-bold text-2xl text-slate-800">Misi 4: Evaluasi Pernyataan</h3>
+                                        <span class="bg-white px-4 py-2 rounded-xl border-2 border-slate-300 text-lg font-bold text-slate-500">Nilai: ___/100</span>
+                                    </div>
+                                    <div class="space-y-4 overflow-y-auto max-h-[300px] pr-2 flex-1">
+                                        <div>
+                                            <p class="text-lg font-bold text-slate-500 mb-2">Pilihan (Benar/Salah):</p>
+                                            <div class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-xl font-bold text-2xl" id="res-e4choice">-</div>
+                                        </div>
+                                        <div>
+                                            <p class="text-lg font-bold text-slate-500 mb-2">Alasan siswa:</p>
+                                            <div class="bg-white p-4 rounded-xl border-2 border-slate-200 text-xl" id="res-e4reason">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hasil Eval 5 -->
+                                <div class="bg-rose-50 rounded-2xl p-6 border-4 border-rose-200 flex flex-col">
+                                    <div class="flex justify-between items-center mb-6 border-b-2 border-rose-200 pb-4">
+                                        <h3 class="font-bold text-2xl text-rose-800">Misi 5: Uraian HOTS</h3>
+                                        <span class="bg-white px-4 py-2 rounded-xl border-2 border-rose-300 text-lg font-bold text-rose-600">Nilai: ___/100</span>
+                                    </div>
+                                    <div class="overflow-y-auto max-h-[300px] pr-2 flex-1">
+                                        <p class="text-lg font-bold text-rose-600 mb-2">Penjelasan hubungan proses hujan:</p>
+                                        <div class="bg-white p-5 rounded-xl border-2 border-rose-200 text-xl whitespace-pre-wrap leading-relaxed" id="res-e5">-</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hasil Eval 6 -->
+                                <div class="bg-rose-50 rounded-2xl p-6 border-4 border-rose-200 flex flex-col">
+                                    <div class="flex justify-between items-center mb-6 border-b-2 border-rose-200 pb-4">
+                                        <h3 class="font-bold text-2xl text-rose-800">Misi 6: Kreasi Teks</h3>
+                                        <span class="bg-white px-4 py-2 rounded-xl border-2 border-rose-300 text-lg font-bold text-rose-600">Nilai: ___/100</span>
+                                    </div>
+                                    <div class="overflow-y-auto max-h-[300px] pr-2 flex-1">
+                                        <p class="text-lg font-bold text-rose-600 mb-2">Judul Teks:</p>
+                                        <div class="bg-white p-4 rounded-xl border-2 border-rose-200 text-2xl font-bold mb-4" id="res-e6title">-</div>
+                                        <p class="text-lg font-bold text-rose-600 mb-2">Isi Teks Eksplanasi:</p>
+                                        <div class="bg-white p-5 rounded-xl border-2 border-rose-200 text-xl whitespace-pre-wrap leading-relaxed" id="res-e6content">-</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // State Management
+        const state = {
+            nama: "",
+            sekolah: "",
+            completed: {
+                eval1: false, eval2: false, eval3: false,
+                eval4: false, eval5: false, eval6: false
+            },
+            answers: {
+                eval1: {},
+                eval2: {},
+                eval3: {},
+                eval4: {},
+                eval5: "",
+                eval6: {}
+            }
+        };
+
+        // Track previous view for stimulus back button
+        let activeViewBeforeStimulus = 'view-intro';
+
+        // Kunci Jawaban Objektif
+        const keys = {
+            eval1: { e1q1: "c", e1q2: "b", e1q3: "c", e1q4: "c", e1q5: "d" },
+            eval2: { e2q1: "c", e2q2: "b", e2q3: "a" }
+        };
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Setup Audio Context untuk Efek Suara (Tanpa file eksternal)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playCorrect() {
+            if(!audioCtx) return;
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const t = audioCtx.currentTime;
+            const playNote = (freq, time, dur) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0, time);
+                gain.gain.linearRampToValueAtTime(0.1, time + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+                osc.start(time);
+                osc.stop(time + dur);
+            };
+            
+            // Suara koin/benar (Arpeggio naik ceria)
+            playNote(523.25, t, 0.2);       // Nada C5
+            playNote(659.25, t + 0.1, 0.2); // Nada E5
+            playNote(783.99, t + 0.2, 0.4); // Nada G5
+        }
+
+        function playWrong() {
+            if(!audioCtx) return;
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const t = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            // Suara tet (Buzz rendah)
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(150, t);
+            osc.frequency.exponentialRampToValueAtTime(80, t + 0.3);
+            
+            gain.gain.setValueAtTime(0, t);
+            gain.gain.linearRampToValueAtTime(0.1, t + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+            
+            osc.start(t);
+            osc.stop(t + 0.3);
+        }
+
+        // UI Helpers
+        function switchView(viewId) {
+            // Save currently active view if we are transitioning to the stimulus page
+            if (viewId === 'view-stimulus') {
+                const current = document.querySelector('.view-section.active');
+                if (current) activeViewBeforeStimulus = current.id;
+            }
+
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0, 0);
+
+            // Tampilkan tombol stimulus global KECUALI di intro, result, rangkuman, dan halaman stimulus itu sendiri
+            const btnStimulus = document.getElementById('btn-stimulus-global');
+            if(viewId === 'view-intro' || viewId === 'view-result' || viewId === 'view-stimulus' || viewId === 'view-rangkuman') {
+                btnStimulus.classList.add('hidden');
+            } else {
+                btnStimulus.classList.remove('hidden');
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function showStimulus() {
+            switchView('view-stimulus');
+        }
+
+        function closeStimulus() {
+            // Return to the page from which the stimulus was opened
+            switchView(activeViewBeforeStimulus);
+        }
+
+        // View 1: Intro Logic
+        function checkIntroForm() {
+            const nama = document.getElementById('input-nama').value.trim();
+            const sekolah = document.getElementById('input-sekolah').value.trim();
+            const btnStart = document.getElementById('btn-start');
+            
+            if (nama !== "" && sekolah !== "") {
+                btnStart.disabled = false;
+                btnStart.classList.remove('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btnStart.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'hover:scale-105');
+            } else {
+                btnStart.disabled = true;
+                btnStart.classList.add('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btnStart.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'hover:scale-105');
+            }
+        }
+
+        function startMission() {
+            state.nama = document.getElementById('input-nama').value.trim();
+            state.sekolah = document.getElementById('input-sekolah').value.trim();
+            
+            document.getElementById('display-nama').innerText = state.nama;
+            document.getElementById('display-sekolah').innerText = state.sekolah;
+            
+            // Izinkan pemutaran audio setelah interaksi user (klik mulai)
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            
+            switchView('view-menu');
+        }
+
+        // View: Rangkuman Logic
+        function goToRangkuman() {
+            switchView('view-rangkuman');
+        }
+
+        // View 2: Menu Logic
+        function goToEval(num) {
+            switchView(`view-eval-${num}`);
+        }
+
+        function backToMenu() {
+            updateMenuUI();
+            switchView('view-menu');
+        }
+
+        function updateMenuUI() {
+            let allCompleted = true;
+            for(let i=1; i<=6; i++) {
+                const evalKey = `eval${i}`;
+                if(state.completed[evalKey]) {
+                    document.getElementById(`badge-eval-${i}`).classList.remove('hidden');
+                    document.getElementById(`card-eval-${i}`).classList.add('border-green-400');
+                } else {
+                    allCompleted = false;
+                }
+            }
+
+            if(allCompleted) {
+                document.getElementById('container-lihat-hasil').classList.remove('hidden');
+            }
+        }
+
+        // Save Logics per Evaluation
+        function saveEval1() {
+            const qs = ['e1q1', 'e1q2', 'e1q3', 'e1q4', 'e1q5'];
+            let allAnswered = true;
+            
+            qs.forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if(selected) {
+                    state.answers.eval1[q] = selected.value;
+                } else {
+                    allAnswered = false;
+                }
+            });
+
+            if(!allAnswered) {
+                alert("Harap jawab semua soal Pilihan Ganda terlebih dahulu.");
+                return;
+            }
+
+            state.completed.eval1 = true;
+            backToMenu();
+        }
+
+        function saveEval2() {
+            const q1 = document.getElementById('e2q1').value;
+            const q2 = document.getElementById('e2q2').value;
+            const q3 = document.getElementById('e2q3').value;
+
+            if(!q1 || !q2 || !q3) {
+                alert("Harap pasangkan semua istilah terlebih dahulu.");
+                return;
+            }
+
+            if(q1 === q2 || q2 === q3 || q1 === q3) {
+                alert("Setiap istilah harus memiliki pasangan yang berbeda!");
+                return;
+            }
+
+            state.answers.eval2 = { e2q1: q1, e2q2: q2, e2q3: q3 };
+            state.completed.eval2 = true;
+            backToMenu();
+        }
+
+        function saveEval3() {
+            const q1 = document.getElementById('e3q1').value.trim();
+            const q2 = document.getElementById('e3q2').value.trim();
+
+            if(!q1 || !q2) {
+                alert("Harap isi kedua kolom jawaban.");
+                return;
+            }
+
+            state.answers.eval3 = { q1, q2 };
+            state.completed.eval3 = true;
+            backToMenu();
+        }
+
+        function saveEval4() {
+            const choice = document.querySelector('input[name="e4_choice"]:checked');
+            const reason = document.getElementById('e4_reason').value.trim();
+
+            if(!choice || !reason) {
+                alert("Harap pilih Benar/Salah dan tuliskan alasannya.");
+                return;
+            }
+
+            state.answers.eval4 = { choice: choice.value, reason };
+            state.completed.eval4 = true;
+            backToMenu();
+        }
+
+        function saveEval5() {
+            const ans = document.getElementById('e5_answer').value.trim();
+            if(!ans) {
+                alert("Harap tulis jawaban uraianmu.");
+                return;
+            }
+
+            state.answers.eval5 = ans;
+            state.completed.eval5 = true;
+            backToMenu();
+        }
+
+        function saveEval6() {
+            const title = document.getElementById('e6_title').value.trim();
+            const content = document.getElementById('e6_content').value.trim();
+
+            if(!title || !content) {
+                alert("Harap isi judul dan teks eksplanasimu.");
+                return;
+            }
+
+            state.answers.eval6 = { title, content };
+            state.completed.eval6 = true;
+            backToMenu();
+        }
+
+        // Generate Result Logic
+        function generateResult() {
+            document.getElementById('res-nama').innerText = state.nama;
+            document.getElementById('res-sekolah').innerText = state.sekolah;
+
+            let score1 = 0;
+            for(let key in keys.eval1) {
+                if(state.answers.eval1[key] === keys.eval1[key]) score1 += 20;
+            }
+            document.getElementById('res-score-1').innerText = score1;
+
+            let score2 = 0;
+            let correctE2 = 0;
+            for(let key in keys.eval2) {
+                if(state.answers.eval2[key] === keys.eval2[key]) correctE2++;
+            }
+            if(correctE2 === 3) score2 = 100;
+            else if(correctE2 === 2) score2 = 67;
+            else if(correctE2 === 1) score2 = 33;
+            else score2 = 0;
+            document.getElementById('res-score-2').innerText = score2;
+
+            document.getElementById('res-e3q1').innerText = state.answers.eval3.q1 || "-";
+            document.getElementById('res-e3q2').innerText = state.answers.eval3.q2 || "-";
+            
+            document.getElementById('res-e4choice').innerText = state.answers.eval4.choice || "-";
+            document.getElementById('res-e4reason').innerText = state.answers.eval4.reason || "-";
+            
+            document.getElementById('res-e5').innerText = state.answers.eval5 || "-";
+            
+            document.getElementById('res-e6title').innerText = state.answers.eval6.title || "-";
+            document.getElementById('res-e6content').innerText = state.answers.eval6.content || "-";
+
+            switchView('view-result');
+        }
+
+        function resetApp() {
+            if(confirm("Apakah kamu yakin ingin mengulang dari awal? Semua data akan dihapus.")) {
+                location.reload();
+            }
+        }
+
+        // Pasang Event Listener untuk mendeteksi jawaban dan memutar suara seketika
+        window.addEventListener('DOMContentLoaded', () => {
+            // Misi 1 (Pilihan Ganda) & Misi 4 (Benar/Salah)
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const name = this.name;
+                    const val = this.value;
+                    
+                    if(keys.eval1[name]) {
+                        // Cek kunci jawaban Misi 1
+                        if(keys.eval1[name] === val) playCorrect();
+                        else playWrong();
+                    } else if (name === 'e4_choice') {
+                        // Kunci jawaban Misi 4 adalah 'Salah' (Kondensasi itu sangat penting)
+                        if(val === 'Salah') playCorrect();
+                        else playWrong();
+                    }
+                });
+            });
+
+            // Misi 2 (Menjodohkan)
+            document.querySelectorAll('select').forEach(select => {
+                select.addEventListener('change', function() {
+                    const id = this.id;
+                    const val = this.value;
+                    
+                    if(keys.eval2[id]) {
+                        // Cek kunci jawaban Misi 2
+                        if(keys.eval2[id] === val) playCorrect();
+                        else playWrong();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
